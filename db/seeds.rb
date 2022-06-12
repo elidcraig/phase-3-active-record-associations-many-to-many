@@ -10,12 +10,17 @@ puts "🌱 Seeding data..."
     price: rand(0..60) # random number between 0 and 60
   )
 
+  user = User.create(
+    name: Faker::Name.first_name
+  )
+
   # create between 1 and 5 reviews for each game
   rand(1..5).times do
     Review.create(
       score: rand(1..10),
       comment: Faker::Lorem.sentence,
-      game_id: game.id # use the ID (primary key) of the game as the foreign key
+      game_id: game.id, # use the ID (primary key) of the game as the foreign key
+      user_id: user.id
     )
   end
 end
